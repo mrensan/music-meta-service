@@ -1,0 +1,111 @@
+openapi: 3.0.1
+info:
+  title: "Music Meta Service"
+  description: "Music Meta Service"
+  version: '0.1'
+servers:
+  - url: '/musify'
+paths:
+  /music-artist/details/{mbid}:
+    get:
+      operationId: musicArtistDetails
+      tags:
+        - musicArtistDetails
+      description: Fetches a JSON
+      parameters:
+        - $ref: '#/components/parameters/Mbid'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MusicArtistDetails'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+components:
+  parameters:
+    Mbid:
+      in: path
+      name: mbid
+      required: true
+      schema:
+        type: string
+      description: "mbid of a musicbrainz entity"
+      example: "f27ec8db-af05-4f36-916e-3d57f91ecf5e"
+  schemas:
+    MusicArtistDetails:
+      type: object
+      properties:
+        mbid:
+          type: string
+          example: "f27ec8db-af05-4f36-916e-3d57f91ecf5e"
+        name:
+          type: string
+          example: "Michael Jackson"
+        gender:
+          type: string
+          example: "Male"
+        country:
+          type: string
+          example: "US"
+        disambiguation:
+          type: string
+          example: "“King of Pop”"
+        description:
+          type: string
+          example: <b>Michael Joseph Jackson</b> (August 29, 1958 –  June 25, 2009) was an American singer, songwriter, record producer, dancer, and actor.
+        albums:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                example: "500d9b05-68c3-3535-86e3-cf685869efc0"
+              title:
+                type: string
+                example: "Farewell My Summer Love"
+              imageUrl:
+                type: string
+                example: http://coverartarchive.org/release/8172928a-a6c7-4d7c-83c8-5db2a4575094/13404444760.jpg
+    ApiError:
+      type: object
+      description: Represents an error returned by the API in json format
+      required:
+        - error
+        - status
+      properties:
+        error:
+          type: string
+        status:
+          type: integer
+        path:
+          type: string
+        timestamp:
+          type: string
+          format: date-time
+  responses:
+    NotFound:
+      description: No Data found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+          example:
+            status: 404
+            error: No Data found for order
+            path: 'http://localhost'
+    BadRequest:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+          example:
+            status: 400
+            error: Invalid Request
+            path: 'http://localhost'

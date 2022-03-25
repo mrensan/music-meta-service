@@ -1,0 +1,56 @@
+server:
+  shutdown: graceful
+
+spring:
+  lifecycle:
+    timeout-per-shutdown-phase: 30s
+  datasource:
+    url: jdbc:mysql://127.0.0.1:13333/music_meta_service?serverTimezone=UTC
+    username: mms_user
+    password: rm4rM16UEGxBW4nU2Gpo
+  liquibase:
+    url: jdbc:mysql://127.0.0.1:13333/music_meta_service?serverTimezone=UTC
+    user: mms_liquibase_user
+    password: CjzPcREYIyotEpCWadiz
+  jpa:
+    open-in-view: false
+    show-sql: false
+  cache:
+    entry:
+      ttl: 15m
+      count: 100000
+  jackson:
+    default-property-inclusion: non_null
+
+resilience4j:
+  ratelimiter:
+    instances:
+      musicbrainz:
+        limitForPeriod: 1
+        limitRefreshPeriod: 1s
+        timeoutDuration: 5s
+      coverartarchive:
+        limitForPeriod: 3
+        limitRefreshPeriod: 1s
+        timeoutDuration: 5s
+      wikipedia:
+        limitForPeriod: 5
+        limitRefreshPeriod: 1s
+        timeoutDuration: 5s
+
+crowler:
+  max-artists-limit: 100
+  max-albums-limit: 100
+
+musicbrainz:
+  url: https://musicbrainz.org/ws/2
+  fmt: json
+  user-agent: https://github.com/mrensan/music-meta-service
+  type: album
+  query: type:person
+
+wikipedia:
+  url: https://en.wikipedia.org/w
+
+coverartarchive:
+  url: http://coverartarchive.org

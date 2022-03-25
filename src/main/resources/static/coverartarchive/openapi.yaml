@@ -1,0 +1,69 @@
+openapi: 3.0.1
+info:
+  title: "Cover art archive"
+  description: "Cover art archive"
+  version: '0.1'
+servers:
+  - url: http://coverartarchive.org
+paths:
+  /release-group/{mbid}:
+    get:
+      tags:
+        - releaseGroupImage
+      description: Fetches a JSON listing of available cover art for a MusicBrainz release group, as well as the url for the specific release from which the art was sourced.
+      parameters:
+        - $ref: '#/components/parameters/Mbid'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReleaseGroupImage'
+
+components:
+  parameters:
+    Mbid:
+      in: path
+      name: mbid
+      required: true
+      schema:
+        type: string
+      description: "mbid of a musicbrainz entity"
+      example: "f27ec8db-af05-4f36-916e-3d57f91ecf5e"
+  schemas:
+    ReleaseGroupImage:
+      type: object
+      properties:
+        images:
+          type: array
+          items:
+            type: object
+            properties:
+              image:
+                type: string
+              types:
+                type: array
+                items:
+                  type: string
+              approved:
+                type: boolean
+              edit:
+                type: integer
+              back:
+                type: boolean
+              comment:
+                type: string
+              front:
+                type: boolean
+              id:
+                type: string
+              thumbnails:
+                type: object
+                properties:
+                  small:
+                    type: string
+                  large:
+                    type: string
+        release:
+          type: string
