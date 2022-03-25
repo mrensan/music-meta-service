@@ -1,0 +1,51 @@
+openapi: 3.0.1
+info:
+  title: "wikipedia"
+  description: "wikipedia"
+  version: '0.1'
+servers:
+  - url: https://en.wikipedia.org/w
+paths:
+  /api.php:
+    get:
+      tags:
+        - artistDetail
+      description: Get Artist's Detail Information
+      parameters:
+        - name: titles
+          in: query
+          schema:
+            type: string
+          example: Michael Jackson
+        - name: action
+          in: query
+          schema:
+            type: string
+          example: query
+        - name: redirects
+          in: query
+          schema:
+            type: boolean
+          example: 'true'
+        - name: prop
+          in: query
+          schema:
+            type: string
+          example: extracts
+        - name: format
+          in: query
+          schema:
+            type: string
+          example: json
+        - name: exintro
+          in: query
+          schema:
+            type: boolean
+          example: 'true'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: string

@@ -1,0 +1,98 @@
+databaseChangeLog:
+  - changeSet:
+      id: '1.0'
+      author: shahram
+      changes:
+        - createTable:
+            tableName: artist_detail
+            columns:
+              - column:
+                  name: ID
+                  type: bigint(20)
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: MBID
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: NAME
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: GENDER
+                  type: varchar(127)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: COUNTRY
+                  type: varchar(127)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: DISAMBIGUATION
+                  type: varchar(255)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: DESCRIPTION
+                  type: TEXT
+                  constraints:
+                    nullable: true
+              - column:
+                  name: FETCHED
+                  type: tinyint(1)
+                  defaultValueBoolean: false
+                  constraints:
+                    nullable: false
+        - createIndex:
+            tableName: artist_detail
+            indexName: IDX_MBID
+            unique: true
+            columns:
+              - column:
+                  name: MBID
+
+        - createTable:
+            tableName: album
+            columns:
+              - column:
+                  name: ID
+                  type: bigint(20)
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: ARTIST_DETAIL_ID
+                  type: bigint(20)
+                  constraints:
+                    foreignKeyName: FK_ALBUM_ARTIST_DETAIL
+                    references: artist_detail(ID)
+                    nullable: false
+              - column:
+                  name: ALBUM_MBID
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: TITLE
+                  type: varchar(255)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: IMAGE_URL
+                  type: varchar(255)
+                  constraints:
+                    nullable: true
+        - createIndex:
+            tableName: album
+            indexName: IDX_ALBUM_ART_DETAIL
+            unique: false
+            columns:
+              - column:
+                  name: ARTIST_DETAIL_ID

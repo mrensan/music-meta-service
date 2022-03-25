@@ -1,2 +1,2 @@
 # music-meta-service
-music-meta-service
+Music Meta Service
