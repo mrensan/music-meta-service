@@ -164,45 +164,4 @@ services only connect and read from the reading specific replications. In the sa
 master replication. We can consider more than one crawler with different internet ip, so that we can fetch more data
 from third-parties limited service.
 
-```puml
-@startuml
-left to right direction
-actor user1
-actor user2
-node lb as "Load Balancer"
-cloud c1 as "Music Meta Service" {
-node mms1 as "Music Meta Service\nReplica 1"
-node mms2 as "Music Meta Service\nReplica 2"
-node mms3 as "Music Meta Service\nCrowler IP A"
-node mms4 as "Music Meta Service\nCrowler IP B"
-
-}
-
-node cache as "Cache"
-node cache2 as "DB Cache"
-node cache3 as "DB Cache"
-
-cloud c2 as "Storage" {
-database db1 as "Database\nPersist\nReplication\nMaster"
-database db2 as "Database\nRead Replication 1"
-database db3 as "Database\nRead Replication 2"
-} 
-
-user1 --> lb
-user2 --> lb
-lb <--> cache
-lb --> mms1
-lb --> mms2
-mms1 --> cache2
-cache2 --> db2
-mms2 --> cache3
-cache3 --> db3
-mms3 --> db1
-mms4 --> db1
-db2 <--> db3
-db3 <--> db1
-user1 -[hidden]> user2
-mms1 -[hidden]> mms2
-mms2 -[hidden]> mms3
-@enduml
-```
+[![Deployment Design](https://www.plantuml.com/plantuml/png/ZL4_R_em4DtzAKxU6Umm8iGFVakb8Y4OImV7le8bnwvifnqgldkv18UK2j4Xohq_JxhpMwIiOcuRnno-PSW1eZqSCnWRKMSRF5CwXmXjmYX6isG-60HNWqh0duCoi5HEUOsHC-r2Qq2BJbktoMfOOrQmm_XXDNBuwjDDa-vvzdwBxyvg1O8FPldGBA_cwgvv5SEdmmXF6_XtzK__ubzonawipsYbZzY5LZJn4Til-dy9lvJgHYblrITsEKHrw1x8gAngbH1CBVhCXTZx3SPaKnwkffhsVgrIniZ7GNaJtEAvfb48n0zxzSWkEJi1OzI_WCbaVgw_0x80LyECnkvKGWIevT4iMLVxO9Ei_n53EvCihtB5-jz5haWkG12O3e0EdXNR-Ij0b8rVZjOOzAzp8A8iCh33TlA6hDW2lMaRzmq0)](https://www.plantuml.com/plantuml/uml/ZL4_R_em4DtzAKxU6Umm8iGFVakb8Y4OImV7le8bnwvifnqgldkv18UK2j4Xohq_JxhpMwIiOcuRnno-PSW1eZqSCnWRKMSRF5CwXmXjmYX6isG-60HNWqh0duCoi5HEUOsHC-r2Qq2BJbktoMfOOrQmm_XXDNBuwjDDa-vvzdwBxyvg1O8FPldGBA_cwgvv5SEdmmXF6_XtzK__ubzonawipsYbZzY5LZJn4Til-dy9lvJgHYblrITsEKHrw1x8gAngbH1CBVhCXTZx3SPaKnwkffhsVgrIniZ7GNaJtEAvfb48n0zxzSWkEJi1OzI_WCbaVgw_0x80LyECnkvKGWIevT4iMLVxO9Ei_n53EvCihtB5-jz5haWkG12O3e0EdXNR-Ij0b8rVZjOOzAzp8A8iCh33TlA6hDW2lMaRzmq0)
