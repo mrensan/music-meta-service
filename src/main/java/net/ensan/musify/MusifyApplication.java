@@ -7,6 +7,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Profile;
 
 @SpringBootApplication
 public class MusifyApplication {
@@ -18,6 +19,7 @@ public class MusifyApplication {
 	@Autowired
 	private CrawlerService crawlerService;
 
+	@Profile("!test")
 	@Bean
 	public CommandLineRunner commandLineRunner(ApplicationContext context) {
 		return args ->

@@ -1,0 +1,21 @@
+artist_detail:
+  - ID: 1
+    MBID: "1f9df192-a621-4f54-8850-2c5373b7eac9"
+    NAME: "Ludwig van Beethoven"
+    GENDER: "male"
+    COUNTRY: "DE"
+    DISAMBIGUATION: "German composer"
+    DESCRIPTION: "was a German composer and pianist."
+    FETCHED: 1
+
+album:
+  - ID: 1
+    ARTIST_DETAIL_ID: 1
+    ALBUM_MBID: "0db33ecd-ddef-4721-8877-7a4b2df993ca"
+    TITLE: "Symphonies 1 & 8"
+    IMAGE_URL: "http://coverartarchive.org/release/08903b2b-742d-4c9e-a5e8-048d29e1d690/15390502503.jpg"
+  - ID: 2
+    ARTIST_DETAIL_ID: 1
+    ALBUM_MBID: "11d498ee-7fc2-4b8c-986d-578d4db8bf6a"
+    TITLE: "Beethoven: Symphony No. 7"
+    IMAGE_URL: "http://coverartarchive.org/release/7a67cd80-f043-46af-be01-b708e50455d0/27883567645.jpg"

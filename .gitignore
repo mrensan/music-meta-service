@@ -4,4 +4,3 @@
 .mvn/wrapper/maven-wrapper.jar
 .garden/*
 error.log
-charts/product-order-management-service-db/charts

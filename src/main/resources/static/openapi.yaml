@@ -97,7 +97,7 @@ components:
             $ref: '#/components/schemas/ApiError'
           example:
             status: 404
-            error: No Data found for order
+            error: No Data found for the artist
             path: 'http://localhost'
     BadRequest:
       description: Bad Request
