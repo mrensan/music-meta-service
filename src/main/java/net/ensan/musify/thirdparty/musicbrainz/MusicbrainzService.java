@@ -1,6 +1,7 @@
 package net.ensan.musify.thirdparty.musicbrainz;
 
 import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
+import io.github.resilience4j.retry.annotation.Retry;
 import net.ensan.musify.musicbrainz.api.QueryResponseApi;
 import net.ensan.musify.musicbrainz.api.ReleaseGroupApi;
 import net.ensan.musify.musicbrainz.model.QueryResponse;
@@ -18,6 +19,7 @@ import org.springframework.web.client.RestClientException;
  */
 @Service
 @RateLimiter(name = "musicbrainz")
+@Retry(name = "musicbrainz")
 public class MusicbrainzService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MusicbrainzService.class);

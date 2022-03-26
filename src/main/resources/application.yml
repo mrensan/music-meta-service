@@ -38,6 +38,17 @@ resilience4j:
         limitForPeriod: 5
         limitRefreshPeriod: 1s
         timeoutDuration: 5s
+  retry:
+    instances:
+      musicbrainz:
+        maxRetryAttempts: 2
+        waitDuration: 3s
+      coverartarchive:
+        maxRetryAttempts: 2
+        waitDuration: 3s
+      wikipedia:
+        maxRetryAttempts: 2
+        waitDuration: 3s
 
 crowler:
   max-artists-limit: 100

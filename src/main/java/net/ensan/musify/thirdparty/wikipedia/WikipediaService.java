@@ -7,6 +7,7 @@ import com.jayway.jsonpath.TypeRef;
 import com.jayway.jsonpath.spi.json.JacksonJsonProvider;
 import com.jayway.jsonpath.spi.mapper.JacksonMappingProvider;
 import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
+import io.github.resilience4j.retry.annotation.Retry;
 import net.ensan.musify.wikipedia.api.ArtistDetailApi;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,6 +26,7 @@ import java.util.Optional;
  */
 @Service
 @RateLimiter(name = "wikipedia")
+@Retry(name = "wikipedia")
 public class WikipediaService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(WikipediaService.class);

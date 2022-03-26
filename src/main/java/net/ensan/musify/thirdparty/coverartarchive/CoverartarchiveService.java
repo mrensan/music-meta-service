@@ -1,6 +1,7 @@
 package net.ensan.musify.thirdparty.coverartarchive;
 
 import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
+import io.github.resilience4j.retry.annotation.Retry;
 import net.ensan.musify.coverartarchive.api.ReleaseGroupImageApi;
 import net.ensan.musify.coverartarchive.model.ReleaseGroupImageImages;
 import org.slf4j.Logger;
@@ -18,6 +19,7 @@ import java.util.Optional;
  */
 @Service
 @RateLimiter(name = "coverartarchive")
+@Retry(name = "coverartarchive")
 public class CoverartarchiveService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CoverartarchiveService.class);
